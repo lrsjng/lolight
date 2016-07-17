@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lolight demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Lars Jung">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'ubuntu', 'open sans', 'sans-serif';
+            font-size: 14px;
+            color: #333;
+            margin: 24px;
+            line-height: 1.3em;
+            min-width: 360px;
+        }
+        h1 {
+            margin: 24px 0;
+            font-size: 1.5em;
+            font-weight: normal;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        pre {
+            font-family: 'ubuntu mono', 'monaco', 'lucida sans typewriter', 'monospace';
+            margin: 0 24px 24px 0;
+            padding: 16px;
+            background: #f8f8f8;
+            border: 1px solid #eee;
+            overflow: auto;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+    <script src="lolight.js"></script>
+</head>
+<body>
+
+<h1><a href="https://larsjung.de/lolight/">lolight demo</a></h1>
+
+<pre class="lolight">
+// javascript
+
+function hello(x) {
+    console.log('hello, ' + x + '!');
+}
+
+const hi = x => {
+    console.log(`hi, ${x}`);
+};
+
+hello('world');
+</pre>
+
+<pre class="lolight">
+/* css */
+
+pre {
+    font-family: 'monospace';
+    margin: 24px 0;
+    padding: 8px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    overflow: auto;
+}
+</pre>
+
+<pre class="lolight">
+&lt;!-- html/xml --&gt;
+
+&lt;html lang="en"&gt;
+&lt;body&gt;
+    &lt;span&gt;hello, world!&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<pre class="lolight">
+# python
+
+import math
+
+def fn(x):
+    return math.sqrt(x + 1)
+
+print(fn(42))
+</pre>
+
+<pre class="lolight">
+# ruby
+
+class HelloWorld
+   def initialize(name)
+      @name = name.capitalize
+   end
+   def sayHi
+      puts "Hello #{@name}!"
+   end
+end
+
+hello = HelloWorld.new("World")
+hello.sayHi
+</pre>
+
+<pre class="lolight">
+// java
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World");
+    }
+}
+</pre>
+
+<pre class="lolight">
+// numbers
+
+123
++123
+-123
+12.3
+12.34.5  // 12.34 and .5
++12e+3
+#abc     // hex col
+#1a2b3c
+</pre>
+
+<pre class="lolight">
+// div vs regexp
+
+1/2
+1/2/3
+1/2 + 2/3
+a/2 + 2/3
+/2 + 2/3
+=/1 + 2/3
++/1 + 2/3
+-/1 + 2/3
+ /1 + 2/3
+</pre>
+
+<pre class="lolight">
+// strings
+
+xyz 'ab"c\'d`e' xyz
+xyz'ab"c\'d`e'xyz
+xyz "ab\"c'd`e" xyz
+xyz"ab\"c'd`e"xyz
+xyz `ab"c'd\`e` xyz
+xyz`ab"c'd\`e`xyz
+</pre>
+
+<pre class="lolight">
+// strings vs regexp
+
+'bc\'de'
+/a[0-9]"'/
+/a\/*/
+'b/"c"de'
+'/bc/'
+/a*"/bc"
+</pre>
+
+</body>
+</html>

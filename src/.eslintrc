@@ -1,0 +1,12 @@
+---
+  env:
+    es6: false
+    node: false
+
+  rules:
+    func-names: 0
+    func-style: 0
+    max-statements: [1, 25]
+    no-var: 0
+    prefer-arrow-callback: 0
+    prefer-reflect: 0

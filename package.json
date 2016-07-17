@@ -1,0 +1,30 @@
+{
+  "name": "lolight",
+  "version": "0.1.0",
+  "description": "Lightweight tokenizer and syntax highlighter.",
+  "homepage": "https://larsjung.de/lolight/",
+  "bugs": "https://github.com/lrsjng/lolight/issues",
+  "author": "Lars Jung <lrsjng@gmail.com> (https://larsjung.de)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lrsjng/lolight.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node test",
+    "check": "npm run -s lint && npm run -s test",
+    "build": "node ghu release",
+    "precommit": "npm run -s check && npm run -s build"
+  },
+  "main": "dist/lolight.min.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "3.1.0",
+    "ghu": "0.7.0",
+    "scar": "0.13.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
