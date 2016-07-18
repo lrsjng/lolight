@@ -4,6 +4,7 @@
     node: false
 
   rules:
+    complexity: [1, 12]
     func-names: 0
     func-style: 0
     max-statements: [1, 25]

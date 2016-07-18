@@ -9,13 +9,12 @@
 }(this, function () {
     var SELECTOR = '.lolight';
     var CLS_PREFIX = 'll-';
-    var STYLE = '.ll-nam{color:#2196f3;} .ll-num{color:#ec407a;} .ll-rex{color:#ef6c00;} .ll-key{color:#555;font-weight:bold} .ll-pct{color:#666;} .ll-str{color:#43a047;} .ll-com{color:#aaa;font-style:italic}';
+    var STYLE = '_nam#2196f3}_num#ec407a}_str#43a047}_rex#ef6c00}_pct#666}_key#555;font-weight:bold}_com#aaa;font-style:italic}'.replace(/_/g, '.' + CLS_PREFIX).replace(/#/g, '{color:#');
 
     var KEYWORD_RE = /^(a(bstract|lias|nd|rguments|rray|s(m|sert)?|uto)|b(ase|egin|ool(ean)?|reak|yte)|c(ase|atch|har|hecked|lass|lone|ompl|onst|ontinue)|de(bugger|cimal|clare|f(ault|er)?|init|l(egate|ete)?)|do|double|e(cho|ls?if|lse(if)?|nd|nsure|num|vent|x(cept|ec|p(licit|ort)|te(nds|nsion|rn)))|f(allthrough|alse|inal(ly)?|ixed|loat|or(each)?|riend|rom|unc(tion)?)|global|goto|guard|i(f|mp(lements|licit|ort)|n(it|clude(_once)?|line|out|stanceof|t(erface|ernal)?)?|s)|l(ambda|et|ock|ong)|m(odule|utable)|NaN|n(amespace|ative|ext|ew|il|ot|ull)|o(bject|perator|r|ut|verride)|p(ackage|arams|rivate|rotected|rotocol|ublic)|r(aise|e(adonly|do|f|gister|peat|quire(_once)?|scue|strict|try|turn))|s(byte|ealed|elf|hort|igned|izeof|tatic|tring|truct|ubscript|uper|ynchronized|witch)|t(emplate|hen|his|hrows?|ransient|rue|ry|ype(alias|def|id|name|of))|u(n(checked|def(ined)?|ion|less|signed|til)|se|sing)|v(ar|irtual|oid|olatile)|w(char_t|hen|here|hile|ith)|xor|yield)$/;
 
     var COM = 'com';
     var KEY = 'key';
-    var LBR = 'lbr';
     var NAM = 'nam';
     var NUM = 'num';
     var PCT = 'pct';
@@ -25,20 +24,15 @@
     var UNK = 'unk';
 
     var TOKEN_RES = [
-        [NUM, /#[0-9a-f]{6}\b/],
-        [NUM, /#[0-9a-f]{3}\b/],
-        [COM, /\/\/.*?(?=\n|$)/],
-        [COM, /#.*?(?=\n|$)/],
+        [NUM, /#([0-9a-f]{6}|[0-9a-f]{3})\b/],
+        [COM, /(\/\/|#).*?(?=\n|$)/],
         [COM, /\/\*[\s\S]*?\*\//],
         [COM, /<!--[\s\S]*?-->/],
-        [REX, /\/(\\\/|[^\/\n])*\//],
-        [STR, /'(\\'|[^'\n])*'/],
-        [STR, /"(\\"|[^"\n])*"/],
-        [STR, /`(\\`|[^`\n])*`/],
+        [REX, /\/(\\\/|[^\n])*?\//],
+        [STR, /(['"`])(\\\1|[\s\S])*?\1/],
         [NUM, /[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)([eE][+-]?[0-9]+)?/],
         [PCT, /[\\.,:;+\-*\/=<>()[\]{}|?!&@~]/],
-        [LBR, /\n/],
-        [SPC, /[^\S\n]+/],
+        [SPC, /\s+/],
         [NAM, /[\w$]+/],
         [UNK, /./]
     ];
@@ -50,7 +44,7 @@
 
         var tokens = [];
         var len = TOKEN_RES.length;
-        var forceDiv = false;
+        var preferDivOverRegExp = false;
 
         while (text) {
             for (var i = 0; i < len; i += 1) {
@@ -60,7 +54,7 @@
                 }
 
                 var cls = TOKEN_RES[i][0];
-                if (cls === REX && forceDiv) {
+                if (cls === REX && preferDivOverRegExp) {
                     continue;
                 }
 
@@ -69,8 +63,12 @@
                 if (cls === NAM && KEYWORD_RE.test(tok)) {
                     cls = KEY;
                 }
-                if (cls !== SPC) {
-                    forceDiv = cls === NUM || cls === NAM;
+                if (cls === SPC) {
+                    if (tok.indexOf('\n') >= 0) {
+                        preferDivOverRegExp = false;
+                    }
+                } else {
+                    preferDivOverRegExp = cls === NUM || cls === NAM;
                 }
 
                 text = text.slice(tok.length);

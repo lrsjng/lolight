@@ -88,12 +88,14 @@ yield
 // str
 [
     '"a"',
+    '"äáàß€"',
     '"1"',
     '"_"',
     '" "',
     '"   "',
     '"\'"',
     "'a'",
+    "'äáàß€'",
     "'1'",
     "'_'",
     "' '",
@@ -109,13 +111,18 @@ yield
 // misc
 [
     ['', []],
+    ['ä', [['unk', 'ä']]],
+    ['á', [['unk', 'á']]],
+    ['à', [['unk', 'à']]],
+    ['ß', [['unk', 'ß']]],
     ['€', [['unk', '€']]],
 
     // whitespace
     [' ', [['spc', ' ']]],
     ['  ', [['spc', '  ']]],
     [' \t ', [['spc', ' \t ']]],
-    ['\n', [['lbr', '\n']]],
+    ['\n', [['spc', '\n']]],
+    [' \n ', [['spc', ' \n ']]],
 
     ['func a', [['key', 'func'], ['spc', ' '], ['nam', 'a']]],
     ['()', [['pct', '('], ['pct', ')']]],
@@ -123,10 +130,19 @@ yield
     // comment
     ['//', [['com', '//']]],
     ['/**/', [['com', '/**/']]],
+    ['/*/', [['rex', '/*/']]], // !!! no comment
     ['#', [['com', '#']]],
-    ['a// comment\nb', [['nam', 'a'], ['com', '// comment'], ['lbr', '\n'], ['nam', 'b']]],
+    ['#ab', [['com', '#ab']]],
+    ['#abc', [['num', '#abc']]], // !!! no comment
+    ['#abcd', [['com', '#abcd']]],
+    ['#abcde', [['com', '#abcde']]],
+    ['#abcdef', [['num', '#abcdef']]], // !!! no comment
+    ['#abcdex', [['com', '#abcdex']]],
+    ['# abc', [['com', '# abc']]],
+    ['# abcdef', [['com', '# abcdef']]],
+    ['a// comment\nb', [['nam', 'a'], ['com', '// comment'], ['spc', '\n'], ['nam', 'b']]],
     ['a/* comment\n*/b', [['nam', 'a'], ['com', '/* comment\n*/'], ['nam', 'b']]],
-    ['a# comment\nb', [['nam', 'a'], ['com', '# comment'], ['lbr', '\n'], ['nam', 'b']]],
+    ['a# comment\nb', [['nam', 'a'], ['com', '# comment'], ['spc', '\n'], ['nam', 'b']]],
 
     // div
     ['a/b', [['nam', 'a'], ['pct', '/'], ['nam', 'b']]],
@@ -146,7 +162,7 @@ yield
     ['a=/b/', [['nam', 'a'], ['pct', '='], ['rex', '/b/']]],
     ['a=/b/c', [['nam', 'a'], ['pct', '='], ['rex', '/b/'], ['nam', 'c']]],
     ['a = /b/ c', [['nam', 'a'], ['spc', ' '], ['pct', '='], ['spc', ' '], ['rex', '/b/'], ['spc', ' '], ['nam', 'c']]],
-    ['a\n/b/c', [['nam', 'a'], ['lbr', '\n'], ['rex', '/b/'], ['nam', 'c']]]
+    ['a\n/b/c', [['nam', 'a'], ['spc', '\n'], ['rex', '/b/'], ['nam', 'c']]]
 ].forEach(([text, exp]) => {
     test(`lolight.tok(${insp(text)}) works`, () => {
         assert.deepEqual(tok(text), exp);
