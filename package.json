@@ -1,6 +1,6 @@
 {
   "name": "lolight",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Lightweight tokenizer and syntax highlighter.",
   "homepage": "https://larsjung.de/lolight/",
   "bugs": "https://github.com/lrsjng/lolight/issues",
