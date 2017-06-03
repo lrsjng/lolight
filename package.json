@@ -1,6 +1,6 @@
 {
   "name": "lolight",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Lightweight tokenizer and syntax highlighter.",
   "homepage": "https://larsjung.de/lolight/",
   "bugs": "https://github.com/lrsjng/lolight/issues",
@@ -19,7 +19,6 @@
     "precommit": "npm run -s check && npm run -s build"
   },
   "main": "dist/lolight.min.js",
-  "dependencies": {},
   "devDependencies": {
     "eslint": "3.19.0",
     "ghu": "0.12.0",

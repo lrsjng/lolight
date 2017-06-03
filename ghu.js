@@ -1,5 +1,5 @@
 const {resolve, join} = require('path');
-const {ghu, each, jszip, mapfn, read, remove, run, uglify, watch, wrap, write} = require('ghu');
+const {ghu, each, jszip, mapfn, read, remove, uglify, watch, wrap, write} = require('ghu');
 
 const NAME = 'lolight';
 
@@ -14,8 +14,8 @@ ghu.defaults('release');
 ghu.before(runtime => {
     runtime.pkg = Object.assign({}, require('./package.json'));
     runtime.comment = `${runtime.pkg.name} v${runtime.pkg.version} - ${runtime.pkg.homepage}`;
-    runtime.commentJs = `/*! ${runtime.comment} */\n`;
-    runtime.commentHtml = `<!-- ${runtime.comment} -->`;
+    runtime.comment_js = `/*! ${runtime.comment} */\n`;
+    runtime.comment_html = `<!-- ${runtime.comment} -->`;
 
     console.log(runtime.comment);
 });
@@ -24,17 +24,13 @@ ghu.task('clean', 'delete build folder', () => {
     return remove(`${BUILD}, ${DIST}`);
 });
 
-ghu.task('lint', () => {
-    return run('eslint .', {stdio: 'inherit'});
-});
-
 ghu.task('build:scripts', runtime => {
     return read(`${SRC}/${NAME}.js`)
-        .then(wrap(runtime.commentJs))
+        .then(wrap(runtime.comment_js))
         .then(write(`${DIST}/${NAME}.js`, {overwrite: true}))
         .then(write(`${BUILD}/${NAME}-${runtime.pkg.version}.js`, {overwrite: true}))
         .then(uglify({compressor: {warnings: false}}))
-        .then(wrap(runtime.commentJs))
+        .then(wrap(runtime.comment_js))
         .then(write(`${DIST}/${NAME}.min.js`, {overwrite: true}))
         .then(write(`${BUILD}/${NAME}-${runtime.pkg.version}.min.js`, {overwrite: true}));
 });
@@ -51,6 +47,7 @@ ghu.task('build:demo', runtime => {
                 .replace(/lolight demo/g, `${NAME} v${runtime.pkg.version} demo`)
                 .replace(/"lolight\.js"/g, `"${NAME}-${runtime.pkg.version}.min.js"`);
         }))
+        .then(wrap('', runtime.comment_html))
         .then(write(`${BUILD}/demo.html`, {overwrite: true}));
 });
 

@@ -1,4 +1,4 @@
-/*! lolight v0.4.1 - https://larsjung.de/lolight/ */
+/*! lolight v0.5.0 - https://larsjung.de/lolight/ */
 (function (root, factory) {
     if (typeof exports === 'object' && typeof module === 'object') {
         module.exports = factory(); // eslint-disable-line no-undef
@@ -45,7 +45,7 @@
 
         var tokens = [];
         var len = TOKEN_RES.length;
-        var preferDivOverRegExp = false;
+        var prefer_div_over_re = false;
 
         while (text) {
             for (var i = 0; i < len; i += 1) {
@@ -55,7 +55,7 @@
                 }
 
                 var cls = TOKEN_RES[i][0];
-                if (cls === REX && preferDivOverRegExp) {
+                if (cls === REX && prefer_div_over_re) {
                     continue;
                 }
 
@@ -66,10 +66,10 @@
                 }
                 if (cls === SPC) {
                     if (tok.indexOf('\n') >= 0) {
-                        preferDivOverRegExp = false;
+                        prefer_div_over_re = false;
                     }
                 } else {
-                    preferDivOverRegExp = cls === NUM || cls === NAM;
+                    prefer_div_over_re = cls === NUM || cls === NAM;
                 }
 
                 text = text.slice(tok.length);
@@ -81,7 +81,7 @@
         return tokens;
     };
 
-    var withDoc = function (fail, fn) {
+    var with_doc = function (fail, fn) {
         if (typeof document !== 'undefined') {
             fn(document); // eslint-disable-line no-undef
         } else if (fail) {
@@ -89,28 +89,28 @@
         }
     };
 
-    var highlightEl = function (el) {
-        withDoc(true, function (doc) {
+    var highlight_el = function (el) {
+        with_doc(true, function (doc) {
             var tokens = tokenize(el.textContent);
             el.innerHTML = '';
             tokens.forEach(function (token) {
-                var tokEl = doc.createElement('span');
-                tokEl.className = CLS_PREFIX + token[0];
-                tokEl.textContent = token[1];
-                el.appendChild(tokEl);
+                var tok_el = doc.createElement('span');
+                tok_el.className = CLS_PREFIX + token[0];
+                tok_el.textContent = token[1];
+                el.appendChild(tok_el);
             });
         });
     };
 
     var lolight = function (sel) {
-        withDoc(true, function (doc) {
+        with_doc(true, function (doc) {
             [].forEach.call(doc.querySelectorAll(sel || SELECTOR), function (el) {
-                highlightEl(el);
+                highlight_el(el);
             });
         });
     };
 
-    withDoc(false, function (doc) {
+    with_doc(false, function (doc) {
         // do it with style
         var head = doc.querySelector('head');
         var style = doc.createElement('style');
@@ -128,6 +128,6 @@
     });
 
     lolight.tok = tokenize;
-    lolight.el = highlightEl;
+    lolight.el = highlight_el;
     return lolight;
 }));
