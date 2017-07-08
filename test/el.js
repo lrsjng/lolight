@@ -1,16 +1,16 @@
 const {test, assert, spy} = require('scar');
 const {el} = require('../src/lolight');
 
-const withDoc = fn => {
+const with_doc = fn => {
     const doc = {
         createElement: spy(call => ({elidx: call.idx}))
     };
 
-    const docBak = global.document;
+    const doc_bak = global.document;
     global.document = doc;
     fn();
-    if (docBak) {
-        global.document = docBak;
+    if (doc_bak) {
+        global.document = doc_bak;
     } else {
         delete global.document; // eslint-disable-line prefer-reflect
     }
@@ -28,27 +28,27 @@ test('lolight.el() throws if no global document', () => {
 });
 
 test('lolight.el() throws if no element', () => {
-    withDoc(() => {
+    with_doc(() => {
         assert.throws(() => {el();});
     });
 });
 
 test('lolight.el({}) throws if no element', () => {
-    withDoc(() => {
+    with_doc(() => {
         assert.throws(() => {el({});});
     });
 });
 
 test('lolight.el(element) works - textContent \'some text\'', () => {
-    const stubEl = {
+    const stub_el = {
         textContent: 'some text',
         innerHtml: 'xyz',
         appendChild: spy()
     };
-    withDoc(() => {
-        el(stubEl);
-        assert.equal(stubEl.innerHTML, '');
-        assert.deepEqual(stubEl.appendChild.calls.map(call => call.args), [
+    with_doc(() => {
+        el(stub_el);
+        assert.equal(stub_el.innerHTML, '');
+        assert.deepEqual(stub_el.appendChild.calls.map(call => call.args), [
             [{elidx: 0, className: 'll-nam', textContent: 'some'}],
             [{elidx: 1, className: 'll-spc', textContent: ' '}],
             [{elidx: 2, className: 'll-nam', textContent: 'text'}]
@@ -62,15 +62,15 @@ test('lolight.el(element) works - textContent \'some text\'', () => {
 });
 
 test('lolight.el(element) works - textContent \' \'', () => {
-    const stubEl = {
+    const stub_el = {
         textContent: ' ',
         innerHtml: 'xyz',
         appendChild: spy()
     };
-    withDoc(() => {
-        el(stubEl);
-        assert.equal(stubEl.innerHTML, '');
-        assert.deepEqual(stubEl.appendChild.calls.map(call => call.args), [
+    with_doc(() => {
+        el(stub_el);
+        assert.equal(stub_el.innerHTML, '');
+        assert.deepEqual(stub_el.appendChild.calls.map(call => call.args), [
             [{elidx: 0, className: 'll-spc', textContent: ' '}]
         ]);
         assert.deepEqual(global.document.createElement.calls.map(call => call.args), [
@@ -80,15 +80,15 @@ test('lolight.el(element) works - textContent \' \'', () => {
 });
 
 test('lolight.el(element) works - textContent \'\'', () => {
-    const stubEl = {
+    const stub_el = {
         textContent: '',
         innerHtml: 'xyz',
         appendChild: spy()
     };
-    withDoc(() => {
-        el(stubEl);
-        assert.equal(stubEl.innerHTML, '');
-        assert.deepEqual(stubEl.appendChild.calls.map(call => call.args), []);
+    with_doc(() => {
+        el(stub_el);
+        assert.equal(stub_el.innerHTML, '');
+        assert.deepEqual(stub_el.appendChild.calls.map(call => call.args), []);
         assert.deepEqual(global.document.createElement.calls.map(call => call.args), []);
     });
 });

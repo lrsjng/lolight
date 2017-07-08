@@ -41,10 +41,10 @@ wchar_t when where while with
 xor
 yield
 `.split(/\s+/).filter(x => x).forEach(text => {
-    test(`lolight.tok(): key ${insp(text)}`, () => {
-        assert.deepEqual(tok(text), [['key', text]]);
+        test(`lolight.tok(): key ${insp(text)}`, () => {
+            assert.deepEqual(tok(text), [['key', text]]);
+        });
     });
-});
 
 
 // nam
