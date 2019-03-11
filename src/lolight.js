@@ -117,7 +117,7 @@
         head.insertBefore(style, head.firstChild);
 
         // auto highlight
-        if (/^(i|c|loade)/.test(doc.readyState)) {
+        if ((/^(i|c|loade)/).test(doc.readyState)) {
             lolight();
         } else {
             doc.addEventListener('DOMContentLoaded', function () {
