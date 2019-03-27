@@ -29,7 +29,7 @@ ghu.task('build:scripts', runtime => {
         .then(wrap(runtime.comment_js))
         .then(write(`${DIST}/${NAME}.js`, {overwrite: true}))
         .then(write(`${BUILD}/${NAME}-${runtime.pkg.version}.js`, {overwrite: true}))
-        .then(uglify({compressor: {warnings: false}}))
+        .then(uglify())
         .then(wrap(runtime.comment_js))
         .then(write(`${DIST}/${NAME}.min.js`, {overwrite: true}))
         .then(write(`${BUILD}/${NAME}-${runtime.pkg.version}.min.js`, {overwrite: true}));
