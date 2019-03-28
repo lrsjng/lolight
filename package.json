@@ -1,6 +1,6 @@
 {
   "name": "lolight",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lightweight tokenizer and syntax highlighter.",
   "homepage": "https://larsjung.de/lolight/",
   "bugs": "https://github.com/lrsjng/lolight/issues",
@@ -23,7 +23,7 @@
     "eslint": "5.15.3",
     "ghu": "0.15.0",
     "isparta": "4.1.1",
-    "scar": "1.2.0"
+    "scar": "1.4.0"
   },
   "engines": {
     "node": ">=8.0.0"

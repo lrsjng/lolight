@@ -45,13 +45,29 @@
 <h1><a href="https://larsjung.de/lolight/">lolight demo</a></h1>
 
 <pre class="lolight">
+// c
+
+#include &lt;stdio.h&gt;
+
+typedef struct data_s {
+    int a;
+    unsigned long b;
+} data_t;
+
+int main(int argc, char** argv) {
+   printf("Hello, World!");
+   return 0;
+}
+</pre>
+
+<pre class="lolight">
 // javascript
 
 function hello(x) {
     console.log('hello, ' + x + '!');
 }
 
-const hi = x => {
+const hi = x =&gt; {
     console.log(`hi, ${x}`);
 };
 
