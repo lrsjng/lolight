@@ -1,4 +1,4 @@
-/*! lolight v1.2.0 - https://larsjung.de/lolight/ */
+/*! lolight v1.3.0 - https://larsjung.de/lolight/ */
 (function (root, factory) {
     if (typeof exports === 'object' && typeof module === 'object') {
         module.exports = factory(); // eslint-disable-line no-undef
