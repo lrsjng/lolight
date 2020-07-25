@@ -1,7 +1,7 @@
 # lolight
 
 [![license][license-img]][github] [![web][web-img]][web] [![github][github-img]][github] [![npm][npm-img]][npm]  
-[![version][npm-v-img]][npm] [![downloads][npm-dm-img]][npm] [![build status][travis-img]][travis]
+[![version][npm-v-img]][npm] [![downloads][npm-dm-img]][npm]
 
 
 Lightweight tokenizer and syntax highlighter.
@@ -10,7 +10,7 @@ Lightweight tokenizer and syntax highlighter.
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2019 Lars Jung (https://larsjung.de)
+Copyright (c) 2020 Lars Jung (https://larsjung.de)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ THE SOFTWARE.
 [web]: https://larsjung.de/lolight/
 [github]: https://github.com/lrsjng/lolight
 [npm]: https://www.npmjs.org/package/lolight
-[travis]: https://travis-ci.org/lrsjng/lolight
 
 [license-img]: https://img.shields.io/badge/license-MIT-a0a060.svg?style=flat-square
 [web-img]: https://img.shields.io/badge/web-larsjung.de/lolight-a0a060.svg?style=flat-square
@@ -43,4 +42,3 @@ THE SOFTWARE.
 
 [npm-v-img]: https://img.shields.io/npm/v/lolight.svg?style=flat-square
 [npm-dm-img]: https://img.shields.io/npm/dm/lolight.svg?style=flat-square
-[travis-img]: https://img.shields.io/travis/lrsjng/lolight.svg?style=flat-square
