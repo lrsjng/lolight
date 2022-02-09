@@ -22,7 +22,7 @@ test('lolight.tok is function', () => {
 abstract alias and arguments array as asm assert auto
 base begin bool boolean break byte
 case catch char checked class clone compl const continue
-debugger decimal declare def default defer deinit del delegate delete do double
+debugger decimal declare def defp default defer deinit del delegate delete dim do double
 echo elif elsif else elseif end ensure enum event except exec explicit export extends extension extern
 fallthrough false final finally fixed float for foreach friend from func function
 global goto guard
@@ -33,7 +33,7 @@ NaN namespace native next new nil not null
 object operator or out override
 package params private protected protocol public
 raise readonly redo ref register repeat require require_once rescue restrict retry return
-sbyte sealed self short signed sizeof static string struct subscript super synchronized switch
+sbyte sealed select self short signed sizeof static string struct subscript super synchronized switch
 template then this throw throws transient true try typealias typedef typeid typename typeof
 unchecked undef undefined union unless unsigned until use using
 var virtual void volatile
