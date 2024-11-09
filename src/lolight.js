@@ -1,6 +1,6 @@
 (function (root, factory) {
     if (typeof exports === 'object' && typeof module === 'object') {
-        module.exports = factory(); // eslint-disable-line no-undef
+        module.exports = factory();
     } else if (typeof define === 'function' && define.amd) { // eslint-disable-line no-undef
         define([], factory); // eslint-disable-line no-undef
     } else {
